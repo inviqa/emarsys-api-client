@@ -1,0 +1,7 @@
+--- 
+bearerToken: <insert_value_here>
+endPointUrl: <insert_value_here>
+merchantCode: <insert_value_here>
+salesEndpointUrl: <insert_value_here>
+secret: <insert_value_here>
+username: <insert_value_here>

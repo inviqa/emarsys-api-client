@@ -1,0 +1,10 @@
+default:
+  suites:
+    domain:
+      contexts:
+        - ApiContext:
+            testMode: true
+    integration:
+      contexts:
+        - ApiContext:
+            testMode: false

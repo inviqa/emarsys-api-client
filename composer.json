@@ -1,0 +1,46 @@
+{
+  "name": "inviqa/worldpay-api-client",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Liviu Panainte",
+      "email": "lpanainte@inviqa.com"
+    },
+    {
+      "name": "Norbert Nagy",
+      "email": "nnagy@inviqa.com"
+    }
+  ],
+  "require": {
+    "php": "^7.1",
+    "guzzlehttp/guzzle": "^6.3"
+  },
+  "require-dev": {
+    "phpspec/phpspec": "^5.0",
+    "behat/behat": "^3.4",
+    "friendsofphp/php-cs-fixer": "^2.12",
+    "webmozart/assert": "^1.3",
+    "php-mock/php-mock-prophecy": "^0.0.2",
+    "symfony/yaml": "^4.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "": [
+        "src"
+      ]
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "test\\": [
+        "test"
+      ],
+      "": [
+        "features/bootstrap"
+      ]
+    }
+  },
+  "config": {
+    "bin-dir": "bin"
+  }
+}

@@ -2,11 +2,11 @@
 
 namespace Inviqa\Emarsys\Api;
 
-use Psr\Http\Message\ResponseInterface;
+use Inviqa\Emarsys\Api\Response\ClientResponse;
 
 interface Client
 {
-    public function sendCSVContent(string $csvFileAbsolutePath): ResponseInterface;
+    public function sendCSVContent(string $csvFileAbsolutePath): ClientResponse;
 
-    public function requestAccountSettings(): string;
+    public function requestAccountSettings(): ClientResponse;
 }

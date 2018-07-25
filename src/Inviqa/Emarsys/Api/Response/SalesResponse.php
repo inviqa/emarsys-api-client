@@ -2,42 +2,32 @@
 
 namespace Inviqa\Emarsys\Api\Response;
 
-use Psr\Http\Message\ResponseInterface;
-
 class SalesResponse
 {
-    private $statusCode;
-
-    private $statusText;
+    private $isSuccessful;
 
     private function __construct()
     {
     }
 
-    public static function fromHttpResponse(ResponseInterface $response): self
+    public static function fromClientResponse(ClientResponse $response): self
     {
         $instance = new self();
         $instance->validate($response);
 
-        $instance->statusCode = $response->getStatusCode();
-        $instance->statusText = $response->getReasonPhrase();
+        $instance->isSuccessful = $response->isSuccessful();
 
         return $instance;
     }
 
-    public function getStatusCode(): string
+    public function isSuccessful()
     {
-        return $this->statusCode;
+        return $this->isSuccessful;
     }
 
-    public function getStatusText(): string
+    private function validate(ClientResponse $response)
     {
-        return $this->statusText;
-    }
-
-    private function validate(ResponseInterface $response)
-    {
-        if ($response->getStatusCode() != '200') {
+        if (!$response->isSuccessful()) {
             throw new \LogicException(
                 sprintf(
                     'Cannot instantiate Sales Response object due an error in the request (Message: %s, Code: %s).',

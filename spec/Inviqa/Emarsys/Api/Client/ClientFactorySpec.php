@@ -27,6 +27,7 @@ class ClientFactorySpec extends ObjectBehavior
         $configuration->isTestMode()->willReturn(false);
         $configuration->getEndpointUrl()->willReturn('');
         $configuration->getSalesEndpointUrl()->willReturn('');
+        $configuration->getMerchantCode()->willReturn(123);
 
         $this->buildClient()->shouldBeAnInstanceOf(HttpClient::class);
     }

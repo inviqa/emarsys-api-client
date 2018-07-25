@@ -3,9 +3,10 @@
 namespace Inviqa\Emarsys\Api\Client;
 
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Exception\ClientException;
 use Inviqa\Emarsys\Api\Client;
 use Inviqa\Emarsys\Api\Configuration;
-use Psr\Http\Message\ResponseInterface;
+use Inviqa\Emarsys\Api\Response\ClientResponse;
 
 class HttpClient implements Client
 {
@@ -28,28 +29,38 @@ class HttpClient implements Client
         ]);
     }
 
-    public function requestAccountSettings(): string
+    public function requestAccountSettings(): ClientResponse
     {
-        $response = $this->client->get('settings', [
-            'headers' => [
-                'Content-type' => 'application/json; charset="utf-8"',
-                'X-WSSE' => $this->authenticationHeaderProvider->settingsAuthenticationHeader(),
-            ],
-        ]);
+        try {
+            $response = $this->client->get('settings', [
+                'headers' => [
+                    'Content-type' => 'application/json; charset="utf-8"',
+                    'X-WSSE' => $this->authenticationHeaderProvider->settingsAuthenticationHeader(),
+                ],
+            ]);
+        } catch (ClientException $e) {
+            $response = $e->getResponse();
+        }
 
-        return (string) $response->getBody()->getContents();
+        return ClientResponse::fromResponseInterface($response);
     }
 
-    public function sendCSVContent(string $csvContent): ResponseInterface
+    public function sendCSVContent(string $csvContent): ClientResponse
     {
-        return $this->adminClient->post('api', [
-            'headers' => [
-                'Content-type' => 'text/csv',
-                'Accept' => 'text/plain',
-                'Content-Encoding' => 'gzip',
-                'Authorization' => $this->authenticationHeaderProvider->salesAuthenticationHeader(),
-            ],
-            'body' => \GuzzleHttp\Psr7\stream_for(gzencode($csvContent)),
-        ]);
+        try {
+            $response = $this->adminClient->post('api', [
+                'headers' => [
+                    'Content-type' => 'text/csv',
+                    'Accept' => 'text/plain',
+                    'Content-Encoding' => 'gzip',
+                    'Authorization' => $this->authenticationHeaderProvider->salesAuthenticationHeader(),
+                ],
+                'body' => \GuzzleHttp\Psr7\stream_for(gzencode($csvContent)),
+            ]);
+        } catch (ClientException $e) {
+            $response = $e->getResponse();
+        }
+
+        return ClientResponse::fromResponseInterface($response);
     }
 }

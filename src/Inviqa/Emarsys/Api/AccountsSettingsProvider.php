@@ -13,8 +13,8 @@ class AccountsSettingsProvider
         $this->client = $client;
     }
 
-    public function fetchAccountSettings()
+    public function fetchAccountSettings(): AccountsResponse
     {
-        return AccountsResponse::fromJson($this->client->requestAccountSettings());
+        return AccountsResponse::fromClientResponse($this->client->requestAccountSettings());
     }
 }

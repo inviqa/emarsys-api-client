@@ -16,10 +16,10 @@ class AccountsResponse
     {
     }
 
-    public static function fromJson(string $json): self
+    public static function fromClientResponse(ClientResponse $clientResponse): self
     {
         $instance = new self();
-        $response = json_decode($json, self::JSON_DECODING_ARRAY_FORMAT);
+        $response = json_decode($clientResponse->getBodyContents(), self::JSON_DECODING_ARRAY_FORMAT);
         $instance->validate($response);
 
         $instance->replyCode = $response['replyCode'];
@@ -42,6 +42,11 @@ class AccountsResponse
     public function getJsonEncodedData(): array
     {
         return $this->data;
+    }
+
+    public function isSuccessful(): bool
+    {
+        return $this->replyCode == "0";
     }
 
     /**

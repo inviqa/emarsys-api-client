@@ -46,8 +46,7 @@ class ApiContext implements Context
     {
         Assert::isInstanceOf($this->response, AccountsResponse::class);
 
-        Assert::eq($this->response->getReplyCode(), 0);
-        Assert::eq($this->response->getReplyText(), 'OK');
+        Assert::true($this->response->isSuccessful());
     }
 
     /**
@@ -70,6 +69,6 @@ EOD;
     {
         Assert::isInstanceOf($this->response, SalesResponse::class);
 
-        Assert::eq($this->response->getStatusCode(), 200);
+        Assert::true($this->response->isSuccessful());
     }
 }

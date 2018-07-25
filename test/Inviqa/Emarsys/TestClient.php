@@ -4,11 +4,12 @@ namespace test\Inviqa\Emarsys;
 
 use GuzzleHttp\Psr7\Response;
 use Inviqa\Emarsys\Api\Client;
+use Inviqa\Emarsys\Api\Response\ClientResponse;
 use Psr\Http\Message\ResponseInterface;
 
 class TestClient implements Client
 {
-    public function requestAccountSettings(): string
+    public function requestAccountSettings(): ClientResponse
     {
         $json = <<< 'EOD'
 {
@@ -23,12 +24,13 @@ class TestClient implements Client
   }
 }
 EOD;
+        $response = new Response(200, [], $json);
 
-        return $json;
+        return ClientResponse::fromResponseInterface($response);
     }
 
-    public function sendCSVContent(string $csvFileAbsolutePath): ResponseInterface
+    public function sendCSVContent(string $csvFileAbsolutePath): ClientResponse
     {
-        return new Response();
+        return ClientResponse::fromResponseInterface(new Response());
     }
 }

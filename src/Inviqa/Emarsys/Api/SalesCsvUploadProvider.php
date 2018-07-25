@@ -15,6 +15,6 @@ class SalesCsvUploadProvider
 
     public function sendCsvContent(string $csvContent): SalesResponse
     {
-        return SalesResponse::fromHttpResponse($this->client->sendCSVContent($csvContent));
+        return SalesResponse::fromClientResponse($this->client->sendCSVContent($csvContent));
     }
 }

@@ -13,6 +13,9 @@ class SalesCsvUploadProvider
         $this->client = $client;
     }
 
+    /**
+     * @throws \LogicException
+     */
     public function sendCsvContent(string $csvContent): SalesResponse
     {
         return SalesResponse::fromClientResponse($this->client->sendCSVContent($csvContent));

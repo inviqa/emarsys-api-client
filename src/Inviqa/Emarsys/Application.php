@@ -28,6 +28,9 @@ class Application
         return $this->accountSettingsProvider->fetchAccountSettings();
     }
 
+    /**
+     * @throws \LogicException
+     */
     public function sendSalesDataViaCSV(string $csvContent)
     {
         return $this->salesCsvUploadProvider->sendCsvContent($csvContent);

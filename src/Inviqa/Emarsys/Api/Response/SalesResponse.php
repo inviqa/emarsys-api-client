@@ -10,12 +10,15 @@ class SalesResponse
     {
     }
 
+    /**
+     * @throws \LogicException
+     */
     public static function fromClientResponse(ClientResponse $response): self
     {
         $instance = new self();
-        $instance->validate($response);
 
         $instance->isSuccessful = $response->isSuccessful();
+        $instance->validate($response);
 
         return $instance;
     }
@@ -25,6 +28,9 @@ class SalesResponse
         return $this->isSuccessful;
     }
 
+    /**
+     * @throws \LogicException
+     */
     private function validate(ClientResponse $response)
     {
         if (!$response->isSuccessful()) {

@@ -33,4 +33,9 @@ EOD;
     {
         return ClientResponse::fromResponseInterface(new Response());
     }
+
+    public function addContact(array $contactContent): ClientResponse
+    {
+        return ClientResponse::fromResponseInterface(new Response());
+    }
 }

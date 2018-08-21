@@ -1,7 +1,9 @@
 <?php
 
 use Behat\Behat\Context\Context;
+use Behat\Gherkin\Node\TableNode;
 use Inviqa\Emarsys\Api\Response\AccountsResponse;
+use Inviqa\Emarsys\Api\Response\ContactResponse;
 use Inviqa\Emarsys\Api\Response\SalesResponse;
 use Inviqa\Emarsys\Application;
 use Symfony\Component\Yaml\Yaml;
@@ -71,4 +73,25 @@ EOD;
 
         Assert::true($this->response->isSuccessful());
     }
+
+    /**
+     * @When I make a new customer API call with the following details
+     */
+    public function iMakeANewCustomerApiCallWithTheFollowingDetails(TableNode $table)
+    {
+        foreach ($table->getHash() as $data) {
+            $this->response = $this->application->addContact($data);
+        }
+    }
+
+    /**
+     * @Then I should receive a successful response from the contact endpoint
+     */
+    public function iShouldReceiveASuccessfulResponseFromTheContactEndpoint()
+    {
+        Assert::isInstanceOf($this->response, ContactResponse::class);
+
+        Assert::true($this->response->isSuccessful());
+    }
+
 }

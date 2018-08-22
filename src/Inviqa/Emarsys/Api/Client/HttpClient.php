@@ -16,10 +16,13 @@ class HttpClient implements Client
 
     private $adminClient;
 
+    private $configuration;
+
     public function __construct(
         AuthenticationHeaderProvider $authenticationHeaderProvider,
         Configuration $configuration
     ) {
+        $this->configuration = $configuration;
         $this->authenticationHeaderProvider = $authenticationHeaderProvider;
         $this->client = new GuzzleClient([
             'base_uri' => $configuration->getEndpointUrl(),
@@ -38,6 +41,7 @@ class HttpClient implements Client
                     'X-WSSE' => $this->authenticationHeaderProvider->settingsAuthenticationHeader(),
                 ],
             ]);
+
         } catch (ClientException $e) {
             $response = $e->getResponse();
         }
@@ -56,6 +60,25 @@ class HttpClient implements Client
                     'Authorization' => $this->authenticationHeaderProvider->salesAuthenticationHeader(),
                 ],
                 'body' => \GuzzleHttp\Psr7\stream_for(gzencode($csvContent)),
+            ]);
+        } catch (ClientException $e) {
+            $response = $e->getResponse();
+        }
+
+        return ClientResponse::fromResponseInterface($response);
+    }
+
+    public function addContact(array $contactContent): ClientResponse
+    {
+        try {
+            $client = new GuzzleClient();
+            $response = $client->post($this->configuration->getEndpointUrl() . '/contact', [
+                'headers' => [
+                    'Content-type' => 'application/json; charset="utf-8"',
+                    'Accept' => 'application/json; charset="utf-8"',
+                    'X-WSSE' => $this->authenticationHeaderProvider->settingsAuthenticationHeader(),
+                ],
+                'body' => json_encode($contactContent),
             ]);
         } catch (ClientException $e) {
             $response = $e->getResponse();

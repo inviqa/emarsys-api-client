@@ -16,6 +16,18 @@ class NewContactRequestSpec extends ObjectBehavior
 
     function it_returns_a_contact_response(Client $client, ClientResponse $clientResponse)
     {
+        $json = <<< 'EOD'
+{
+    "replyCode": 0,
+    "replyText": "OK",
+    "data": {
+        "ids": [
+            952758003
+        ]
+    }
+}
+EOD;
+
         $contactContent = [
             1 => 'test',
             2 => 'customer',
@@ -29,6 +41,7 @@ class NewContactRequestSpec extends ObjectBehavior
 
         $client->addContact($body)->willReturn($clientResponse);
         $clientResponse->isSuccessful()->willReturn(true);
+        $clientResponse->getBodyContents()->willReturn($json);
 
         $this->addContact($contactContent)->shouldBeLike(
             ContactResponse::fromClientResponse($clientResponse->getWrappedObject())

@@ -36,6 +36,18 @@ EOD;
 
     public function addContact(array $contactContent): ClientResponse
     {
-        return ClientResponse::fromResponseInterface(new Response());
+        $json = <<< 'EOD'
+{
+    "replyCode": 0,
+    "replyText": "OK",
+    "data": {
+        "ids": [
+            952758003
+        ]
+    }
+}
+EOD;
+
+        return ClientResponse::fromResponseInterface(new Response(200, [], $json));
     }
 }

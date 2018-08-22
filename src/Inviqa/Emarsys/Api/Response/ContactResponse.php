@@ -19,7 +19,7 @@ class ContactResponse
         return $instance;
     }
 
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
         return $this->isSuccessful;
     }

@@ -1,7 +1,7 @@
 @emarsys
 Feature: Ensure contacts are sent to Emarsys via the REST API
   As a store owner
-  I want new customer dat to be sent to Emarsys via the API
+  I want new customer data to be sent to Emarsys via the API
 
   Scenario: Sending a new customer to Emarsys
     When I make a new customer API call with the following details

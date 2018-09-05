@@ -9,6 +9,34 @@ use Psr\Http\Message\ResponseInterface;
 
 class TestClient implements Client
 {
+
+    const CONTACT_SUCCESS_JSON = <<< 'EOD'
+{
+    "replyCode": 0,
+    "replyText": "OK",
+    "data": {
+        "ids": [
+            952758003
+        ]
+    }
+}
+EOD;
+
+    const CONTACT_ERROR_JSON = <<< 'EOD'
+{
+    "replyCode":0,
+    "replyText":"OK",
+    "data":{
+        "ids":[],
+        "errors":{
+        "123456":{
+            "2007":"Invalid choice id for field id: 14"
+            }
+        }
+    }
+}
+EOD;
+
     public function requestAccountSettings(): ClientResponse
     {
         $json = <<< 'EOD'
@@ -36,17 +64,11 @@ EOD;
 
     public function addContact(array $contactContent): ClientResponse
     {
-        $json = <<< 'EOD'
-{
-    "replyCode": 0,
-    "replyText": "OK",
-    "data": {
-        "ids": [
-            952758003
-        ]
-    }
-}
-EOD;
+        $json = self::CONTACT_SUCCESS_JSON;
+
+        if (in_array("hasError", $contactContent['contacts'][0])) {
+            $json = self::CONTACT_ERROR_JSON;
+        }
 
         return ClientResponse::fromResponseInterface(new Response(200, [], $json));
     }

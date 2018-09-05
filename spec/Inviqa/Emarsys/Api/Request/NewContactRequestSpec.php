@@ -29,13 +29,28 @@ class NewContactRequestSpec extends ObjectBehavior
 EOD;
 
         $contactContent = [
-            1 => 'test',
-            2 => 'customer',
-            3 => 'test@customer.com'
+            1188 => "123456",
+            1    => "Test",
+            2    => "Customer",
+            3    => "test.customer@behat.com",
+            4    => "1979-05-21",
+            5    => "1",
+            11   => "Glasgow",
+            13   => "PA16 0XA",
+            14   => "hasError",
+            6096 => "United Kingdom",
+            6049 => "UK",
+            15   => "01475 631514",
+            31   => "1",
+            6092 => "web",
+            6093 => "Register",
+            6097 => "2009-01-25",
+            6094 => "mens",
+            6095 => "Y",
         ];
 
         $body = [
-            'key_id' => '3', // This defaults to 3 (email) if not set, but setting anyway
+            'key_id'   => '1188', // This defaults to 3 (email) if not set, but setting anyway
             'contacts' => [$contactContent]
         ];
 

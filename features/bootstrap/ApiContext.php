@@ -79,9 +79,7 @@ EOD;
      */
     public function iMakeANewCustomerApiCallWithTheFollowingDetails(TableNode $table)
     {
-        foreach ($table->getHash() as $data) {
-            $this->response = $this->application->addContact($data);
-        }
+        $this->response = $this->application->addContact($table->getHash()[0]);
     }
 
     /**
@@ -94,4 +92,11 @@ EOD;
         Assert::true($this->response->isSuccessful());
     }
 
+    /**
+     * @Then I should receive a successful response from the endpoint that has an error message
+     */
+    public function iShouldReceiveASuccessfulResponseFromTheEndpointThatHasAnErrorMessage()
+    {
+        Assert::true($this->response->hasErrors());
+    }
 }

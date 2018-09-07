@@ -7,7 +7,7 @@ use Inviqa\Emarsys\Api\Response\ClientResponse;
 use Inviqa\Emarsys\Api\Response\ContactResponse;
 use PhpSpec\ObjectBehavior;
 
-class NewContactRequestSpec extends ObjectBehavior
+class ContactRequestSpec extends ObjectBehavior
 {
     function let(Client $client)
     {
@@ -54,11 +54,11 @@ EOD;
             'contacts' => [$contactContent]
         ];
 
-        $client->addContact($body)->willReturn($clientResponse);
+        $client->addOrUpdateContact($body)->willReturn($clientResponse);
         $clientResponse->isSuccessful()->willReturn(true);
         $clientResponse->getBodyContents()->willReturn($json);
 
-        $this->addContact($contactContent)->shouldBeLike(
+        $this->addOrUpdateContact($contactContent)->shouldBeLike(
             ContactResponse::fromClientResponse($clientResponse->getWrappedObject())
         );
     }

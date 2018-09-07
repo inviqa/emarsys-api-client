@@ -62,7 +62,7 @@ EOD;
         return ClientResponse::fromResponseInterface(new Response());
     }
 
-    public function addContact(array $contactContent): ClientResponse
+    public function addOrUpdateContact(array $contactContent): ClientResponse
     {
         $json = self::CONTACT_SUCCESS_JSON;
 

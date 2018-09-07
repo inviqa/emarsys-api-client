@@ -79,7 +79,7 @@ EOD;
      */
     public function iMakeANewCustomerApiCallWithTheFollowingDetails(TableNode $table)
     {
-        $this->response = $this->application->addContact($table->getHash()[0]);
+        $this->response = $this->application->addOrUpdateContact($table->getHash()[0]);
     }
 
     /**

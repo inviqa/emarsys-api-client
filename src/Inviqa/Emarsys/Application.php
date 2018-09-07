@@ -6,14 +6,14 @@ use Inviqa\Emarsys\Api\AccountsSettingsProvider;
 use Inviqa\Emarsys\Api\Client\AuthenticationHeaderProvider;
 use Inviqa\Emarsys\Api\Client\ClientFactory;
 use Inviqa\Emarsys\Api\Configuration;
-use Inviqa\Emarsys\Api\Request\NewContactRequest;
+use Inviqa\Emarsys\Api\Request\ContactRequest;
 use Inviqa\Emarsys\Api\SalesCsvUploadProvider;
 
 class Application
 {
     private $accountSettingsProvider;
     private $salesCsvUploadProvider;
-    private $newContactRequest;
+    private $contactRequest;
 
     public function __construct(Configuration $configuration)
     {
@@ -23,7 +23,7 @@ class Application
 
         $this->accountSettingsProvider = new AccountsSettingsProvider($client);
         $this->salesCsvUploadProvider = new SalesCsvUploadProvider($client);
-        $this->newContactRequest = new NewContactRequest($client);
+        $this->contactRequest = new ContactRequest($client);
     }
 
     public function retrieveAccountSettings()
@@ -42,8 +42,8 @@ class Application
     /**
      * @throws \LogicException
      */
-    public function addContact(array $contactContent)
+    public function addOrUpdateContact(array $contactContent)
     {
-        return $this->newContactRequest->addContact($contactContent);
+        return $this->contactRequest->addOrUpdateContact($contactContent);
     }
 }

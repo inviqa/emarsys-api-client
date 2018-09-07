@@ -68,11 +68,11 @@ class HttpClient implements Client
         return ClientResponse::fromResponseInterface($response);
     }
 
-    public function addContact(array $contactContent): ClientResponse
+    public function addOrUpdateContact(array $contactContent): ClientResponse
     {
         try {
             $client = new GuzzleClient();
-            $response = $client->post($this->configuration->getEndpointUrl() . '/contact', [
+            $response = $client->put($this->configuration->getEndpointUrl() . '/contact/?create_if_not_exists=1', [
                 'headers' => [
                     'Content-type' => 'application/json; charset="utf-8"',
                     'Accept' => 'application/json; charset="utf-8"',

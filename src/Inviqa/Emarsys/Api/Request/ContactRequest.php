@@ -5,7 +5,7 @@ namespace Inviqa\Emarsys\Api\Request;
 use Inviqa\Emarsys\Api\Client;
 use Inviqa\Emarsys\Api\Response\ContactResponse;
 
-class NewContactRequest
+class ContactRequest
 {
     private const CUSTOMER_NUMBER = 1188;
     private const FIRST_NAME = 1;
@@ -57,7 +57,7 @@ class NewContactRequest
     /**
      * @throws \LogicException
      */
-    public function addContact(array $contactContent): ContactResponse
+    public function addOrUpdateContact(array $contactContent): ContactResponse
     {
         $body = [
             'key_id' => self::CUSTOMER_NUMBER,
@@ -66,6 +66,6 @@ class NewContactRequest
             ]
         ];
 
-        return ContactResponse::fromClientResponse($this->client->addContact($body));
+        return ContactResponse::fromClientResponse($this->client->addOrUpdateContact($body));
     }
 }

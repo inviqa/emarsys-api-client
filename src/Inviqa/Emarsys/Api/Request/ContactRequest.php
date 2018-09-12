@@ -59,10 +59,13 @@ class ContactRequest
      */
     public function addOrUpdateContact(array $contactContent): ContactResponse
     {
+        $contacts = array_combine(self::$map, $contactContent);
+        $contacts = array_filter($contacts, function($value) { return $value !== ''; });
+
         $body = [
             'key_id' => self::CUSTOMER_NUMBER,
             'contacts' => [
-                array_combine(self::$map, $contactContent)
+                $contacts
             ]
         ];
 

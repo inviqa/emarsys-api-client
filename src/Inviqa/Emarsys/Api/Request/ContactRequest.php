@@ -14,7 +14,7 @@ class ContactRequest
     private const DOB = 4;
     private const GENDER = 5;
     private const CITY = 11;
-    private const POSTCODE = 13;
+    private const ZIP_CODE = 13;
     private const COUNTRY = 14;
     private const REISS_COUNTRY = 6096;
     private const CHANNEL = 6049;
@@ -23,8 +23,8 @@ class ContactRequest
     private const REGISTRATION_SOURCE = 6092;
     private const REGISTRATION_DETAIL = 6093;
     private const REGISTRATION_DATE = 6097;
-    private const NEWSLETTER = 6094;
-    private const VIP = 6095;
+    private const REISS_NEWSLETTER = 6094;
+    private const STORE_VIP = 6095;
 
     private $client;
 
@@ -36,7 +36,7 @@ class ContactRequest
         self::DOB,
         self::GENDER,
         self::CITY,
-        self::POSTCODE,
+        self::ZIP_CODE,
         self::COUNTRY,
         self::REISS_COUNTRY,
         self::CHANNEL,
@@ -45,8 +45,8 @@ class ContactRequest
         self::REGISTRATION_SOURCE,
         self::REGISTRATION_DETAIL,
         self::REGISTRATION_DATE,
-        self::NEWSLETTER,
-        self::VIP,
+        self::REISS_NEWSLETTER,
+        self::STORE_VIP,
     ];
 
     public function __construct(Client $client)

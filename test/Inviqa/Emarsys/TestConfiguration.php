@@ -13,6 +13,7 @@ class TestConfiguration implements Configuration
     private $secret;
     private $bearerToken;
     private $merchantCode;
+    private $keyFieldId;
 
     public function __construct(array $params = [])
     {
@@ -23,6 +24,7 @@ class TestConfiguration implements Configuration
         $this->secret = $params['secret'] ?? '';
         $this->bearerToken = $params['bearerToken'] ?? '';
         $this->merchantCode = $params['merchantCode'] ?? '';
+        $this->keyFieldId = $params['keyFieldId'] ?? 0;
     }
 
     public function isTestMode(): bool
@@ -58,5 +60,10 @@ class TestConfiguration implements Configuration
     public function getMerchantCode(): string
     {
         return $this->merchantCode;
+    }
+
+    public function getKeyFieldId(): int
+    {
+        return $this->keyFieldId;
     }
 }

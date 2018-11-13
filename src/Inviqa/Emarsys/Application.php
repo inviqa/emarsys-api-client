@@ -23,7 +23,7 @@ class Application
 
         $this->accountSettingsProvider = new AccountsSettingsProvider($client);
         $this->salesCsvUploadProvider = new SalesCsvUploadProvider($client);
-        $this->contactRequest = new ContactRequest($client);
+        $this->contactRequest = new ContactRequest($client, $configuration->getKeyFieldId());
     }
 
     public function retrieveAccountSettings()

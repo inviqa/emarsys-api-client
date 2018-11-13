@@ -11,7 +11,7 @@ class ContactRequestSpec extends ObjectBehavior
 {
     function let(Client $client)
     {
-        $this->beConstructedWith($client);
+        $this->beConstructedWith($client, 1188);
     }
 
     function it_returns_a_contact_response(Client $client, ClientResponse $clientResponse)

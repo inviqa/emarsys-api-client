@@ -17,4 +17,6 @@ interface Configuration
     public function getBearerToken(): string;
 
     public function getMerchantCode(): string;
+
+    public function getKeyFieldId(): int;
 }

@@ -41,7 +41,6 @@ class HttpClient implements Client
                     'X-WSSE' => $this->authenticationHeaderProvider->settingsAuthenticationHeader(),
                 ],
             ]);
-
         } catch (ClientException $e) {
             $response = $e->getResponse();
         }

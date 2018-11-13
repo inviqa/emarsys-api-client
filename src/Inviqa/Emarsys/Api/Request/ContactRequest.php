@@ -21,13 +21,13 @@ class ContactRequest
      */
     public function addOrUpdateContact(array $contactContent): ContactResponse
     {
-        $contacts = array_filter($contactContent, function($value) { return $value !== ''; });
+        $contacts = array_filter($contactContent, function ($value) { return $value !== ''; });
 
         $body = [
             'key_id' => $this->keyFieldId,
             'contacts' => [
-                $contacts
-            ]
+                $contacts,
+            ],
         ];
 
         return ContactResponse::fromClientResponse($this->client->addOrUpdateContact($body));

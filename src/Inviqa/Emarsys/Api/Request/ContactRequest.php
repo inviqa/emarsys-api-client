@@ -32,4 +32,14 @@ class ContactRequest
 
         return ContactResponse::fromClientResponse($this->client->addOrUpdateContact($body));
     }
+
+    public function deleteContact(int $customerIdentifier)
+    {
+        $body = [
+            $this->keyFieldId => $customerIdentifier,
+            'key_id' => $this->keyFieldId,
+        ];
+
+        return ContactResponse::fromClientResponse($this->client->deleteContact($body));
+    }
 }

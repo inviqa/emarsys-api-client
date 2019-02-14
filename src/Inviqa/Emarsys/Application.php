@@ -46,4 +46,12 @@ class Application
     {
         return $this->contactRequest->addOrUpdateContact($contactContent);
     }
+
+    /**
+     * @throws \LogicException
+     */
+    public function deleteContact(int $customerIdentifier)
+    {
+        return $this->contactRequest->deleteContact($customerIdentifier);
+    }
 }

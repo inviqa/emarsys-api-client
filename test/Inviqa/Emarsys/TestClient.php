@@ -72,4 +72,15 @@ EOD;
 
         return ClientResponse::fromResponseInterface(new Response(200, [], $json));
     }
+
+    public function deleteContact(array $contactContent): ClientResponse
+    {
+        $json = self::CONTACT_SUCCESS_JSON;
+
+//        if (in_array("hasError", $contactContent['contacts'][0])) {
+//            $json = self::CONTACT_ERROR_JSON;
+//        }
+
+        return ClientResponse::fromResponseInterface(new Response(200, [], $json));
+    }
 }

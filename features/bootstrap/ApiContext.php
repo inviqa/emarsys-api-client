@@ -99,4 +99,12 @@ EOD;
     {
         Assert::true($this->response->hasErrors());
     }
+
+    /**
+     * @When I make a delete customer API call with the customer number :customerNumber
+     */
+    public function iMakeADeleteCustomerApiCallWithTheCustomerNumber(int $customerIdentifier)
+    {
+        $this->response = $this->application->deleteContact($customerIdentifier);
+    }
 }

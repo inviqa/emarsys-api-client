@@ -11,4 +11,6 @@ interface Client
     public function requestAccountSettings(): ClientResponse;
 
     public function addOrUpdateContact(array $contactContent): ClientResponse;
+
+    public function deleteContact(array $contactContent): ClientResponse;
 }

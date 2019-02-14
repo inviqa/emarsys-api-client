@@ -76,19 +76,18 @@ EOD;
     }
 }
 EOD;
-
-        $contactIdentifier = "123456";
+        $contactIdentifier = '123456';
 
         $body = [
-            'key_id'   => '1188', // This defaults to 3 (email) if not set, but setting anyway
-            'contacts' => $contactIdentifier
+            '1188' => $contactIdentifier,
+            'key_id' => '1188',
         ];
 
         $client->deleteContact($body)->willReturn($clientResponse);
         $clientResponse->isSuccessful()->willReturn(true);
         $clientResponse->getBodyContents()->willReturn($json);
 
-        $this->addOrUpdateContact($contactIdentifier)->shouldBeLike(
+        $this->deleteContact($contactIdentifier)->shouldBeLike(
             ContactResponse::fromClientResponse($clientResponse->getWrappedObject())
         );
     }

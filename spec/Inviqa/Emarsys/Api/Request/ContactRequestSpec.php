@@ -62,4 +62,33 @@ EOD;
             ContactResponse::fromClientResponse($clientResponse->getWrappedObject())
         );
     }
+
+
+    function it_returns_a_contact_response_for_delete_request(Client $client, ClientResponse $clientResponse)
+    {
+        $json = <<< 'EOD'
+{
+    "replyCode":0,
+    "replyText":"OK",
+    "data":{
+        "errors":[],
+        "deleted_contacts":1
+    }
+}
+EOD;
+        $contactIdentifier = '123456';
+
+        $body = [
+            '1188' => $contactIdentifier,
+            'key_id' => '1188',
+        ];
+
+        $client->deleteContact($body)->willReturn($clientResponse);
+        $clientResponse->isSuccessful()->willReturn(true);
+        $clientResponse->getBodyContents()->willReturn($json);
+
+        $this->deleteContact($contactIdentifier)->shouldBeLike(
+            ContactResponse::fromClientResponse($clientResponse->getWrappedObject())
+        );
+    }
 }

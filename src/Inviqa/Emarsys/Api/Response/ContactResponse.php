@@ -43,7 +43,7 @@ class ContactResponse
 
     public function hasErrors()
     {
-        return isset($this->data['errors']);
+        return !empty($this->data['errors']);
     }
 
     public function getErrors()

@@ -19,9 +19,12 @@ class ContactRequest
     /**
      * @throws \LogicException
      */
-    public function addOrUpdateContact(array $contactContent): ContactResponse
+    public function addOrUpdateContact(array $contactContent, array $allowEmpty = []): ContactResponse
     {
-        $contacts = array_filter($contactContent, function ($value) { return $value !== ''; });
+        $contacts = array_filter($contactContent, function ($value, $key) use ($allowEmpty) {
+            return $value !== '' || in_array($key, $allowEmpty);
+        }, ARRAY_FILTER_USE_BOTH);
+
 
         $body = [
             'key_id' => $this->keyFieldId,

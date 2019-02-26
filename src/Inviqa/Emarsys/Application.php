@@ -42,9 +42,9 @@ class Application
     /**
      * @throws \LogicException
      */
-    public function addOrUpdateContact(array $contactContent)
+    public function addOrUpdateContact(array $contactContent, array $allowEmpty = [])
     {
-        return $this->contactRequest->addOrUpdateContact($contactContent);
+        return $this->contactRequest->addOrUpdateContact($contactContent, $allowEmpty);
     }
 
     /**

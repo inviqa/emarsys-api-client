@@ -45,4 +45,9 @@ class ContactRequest
 
         return ContactResponse::fromClientResponse($this->client->deleteContact($body));
     }
+
+    public function optOutContact(array $contactContent)
+    {
+        return ContactResponse::fromClientResponse($this->client->optOutContact($contactContent));
+    }
 }

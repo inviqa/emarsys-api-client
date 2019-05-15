@@ -13,4 +13,6 @@ interface Client
     public function addOrUpdateContact(array $contactContent): ClientResponse;
 
     public function deleteContact(array $contactContent): ClientResponse;
+
+        public function optOutContact(array $contactContent): ClientResponse;
 }

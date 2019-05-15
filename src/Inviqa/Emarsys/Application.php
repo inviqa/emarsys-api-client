@@ -54,4 +54,14 @@ class Application
     {
         return $this->contactRequest->deleteContact($customerIdentifier);
     }
+
+    /**
+     * @param array $contactContent
+     *
+     * @return Api\Response\ContactResponse
+     */
+    public function optOutContact(array $contactContent)
+    {
+        return $this->contactRequest->optOutContact($contactContent);
+    }
 }

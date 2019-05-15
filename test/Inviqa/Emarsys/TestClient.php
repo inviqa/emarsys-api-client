@@ -83,4 +83,15 @@ EOD;
 
         return ClientResponse::fromResponseInterface(new Response(200, [], $json));
     }
+
+    public function optOutContact(array $contactContent): ClientResponse
+    {
+        $json = self::CONTACT_SUCCESS_JSON;
+
+        if (in_array("999999", $contactContent)) {
+            $json = self::CONTACT_ERROR_JSON;
+        }
+
+        return ClientResponse::fromResponseInterface(new Response(200, [], $json));
+    }
 }

@@ -63,7 +63,6 @@ EOD;
         );
     }
 
-
     function it_returns_a_contact_response_for_delete_request(Client $client, ClientResponse $clientResponse)
     {
         $json = <<< 'EOD'
@@ -88,6 +87,32 @@ EOD;
         $clientResponse->getBodyContents()->willReturn($json);
 
         $this->deleteContact($contactIdentifier)->shouldBeLike(
+            ContactResponse::fromClientResponse($clientResponse->getWrappedObject())
+        );
+    }
+
+    function it_returns_a_contact_response_for_an_opt_out_request(Client $client, ClientResponse $clientResponse)
+    {
+        $json = <<< 'EOD'
+{
+    "replyCode":0,
+    "replyText":"OK",
+    "data":{
+        "errors":[]
+    }
+}
+EOD;
+        $contactData = [
+            'launch_list_id' => '4321',
+            'email_id' => '1234',
+            'contact_uid' => '111111'
+        ];
+
+        $client->optOutContact($contactData)->willReturn($clientResponse);
+        $clientResponse->isSuccessful()->willReturn(true);
+        $clientResponse->getBodyContents()->willReturn($json);
+
+        $this->optOutContact($contactData)->shouldBeLike(
             ContactResponse::fromClientResponse($clientResponse->getWrappedObject())
         );
     }

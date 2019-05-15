@@ -107,4 +107,13 @@ EOD;
     {
         $this->response = $this->application->deleteContact($customerIdentifier);
     }
+
+    /**
+     * @When I make an opt out customer API call with the following details
+     */
+    public function iMakeAnOptOutCustomerApiCallWithTheFollowingDetails(TableNode $table)
+    {
+        $this->response = $this->application->optOutContact($table->getHash()[0]);
+    }
+
 }

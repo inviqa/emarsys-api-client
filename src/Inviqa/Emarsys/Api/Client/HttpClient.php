@@ -104,4 +104,23 @@ class HttpClient implements Client
 
         return ClientResponse::fromResponseInterface($response);
     }
+
+    public function optOutContact(array $contactContent): ClientResponse
+    {
+        try {
+            $client = new GuzzleClient();
+            $response = $client->post($this->configuration->getEndpointUrl() . '/email/unsubscribe', [
+                'headers' => [
+                    'Content-type' => 'application/json; charset="utf-8"',
+                    'Accept' => 'application/json; charset="utf-8"',
+                    'X-WSSE' => $this->authenticationHeaderProvider->settingsAuthenticationHeader(),
+                ],
+                'body' => json_encode($contactContent),
+            ]);
+        } catch (ClientException $e) {
+            $response = $e->getResponse();
+        }
+
+        return ClientResponse::fromResponseInterface($response);
+    }
 }
